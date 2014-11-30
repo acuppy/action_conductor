@@ -5,7 +5,7 @@ describe Handler do
     expect(Handler::VERSION).not_to be nil
   end
 
-  it 'does something useful' do
-    expect(false).to eq(true)
+  it "binds to ActionController::Base" do
+    expect(ActionController::Base.ancestors).to include(Handler::ActionController)
   end
 end
