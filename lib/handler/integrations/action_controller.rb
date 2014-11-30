@@ -2,15 +2,9 @@ module Handler
   module ActionController
     extend ActiveSupport::Concern
 
-    included do
-      cattr_reader :handlers
-    end
-
     module ClassMethods
       def handler(handle, options={})
-        available_actions = only_actions - except_actions
-
-        self.handlers[handle] = define_handler(handle, options)
+        handlers[handle] = define_handler(handle, options)
       end
 
       private
@@ -18,16 +12,18 @@ module Handler
       def define_handler(handle, options={})
         only_actions   = options.fetch(:only)   { self.action_methods.to_a }
         except_actions = options.fetch(:except) { [] }
+        actions        = only_actions - except_actions
 
-        Handler::Definition.new do |definition|
-          definition.handle  = handle
-          definition.actions = only_actions - except_actions
-        end
+        Handler::Definition.new handle: handle, action: actions
       end
 
       def handlers
         @@handlers ||= {}
       end
+    end
+
+    def handled?
+      true
     end
   end
 end
