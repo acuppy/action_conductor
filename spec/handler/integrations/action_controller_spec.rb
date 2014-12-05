@@ -1,12 +1,10 @@
 require "spec_helper"
 
-class FooHandler < Handler::Base
-end
-
 describe DummyController, "Integration ActionController::Base" do
   describe ".handler" do
-    before { described_class.class_eval { handler :foo } }
+    before  { DummyController.class_eval { handler :test_single_export } }
+    subject { DummyController.new }
 
-    it { expect(subject).to be_handled }
+    it { expect(subject).to respond_to :handler }
   end
 end
