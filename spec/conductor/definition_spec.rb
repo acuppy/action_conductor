@@ -1,13 +1,13 @@
 require "spec_helper"
-require "handler/definition"
+require "conductor/definition"
 
-class HandleNameHandler
+class HandleNameConductor
 end
 
-class FooBarHandler
+class FooBarConductor
 end
 
-module Handler
+module Conductor
   describe Definition do
     shared_examples_for "a definition class" do
       let(:class_name) { nil }
@@ -26,22 +26,22 @@ module Handler
       end
 
       it { expect(definition.handle).to eq handle }
-      it { expect(definition.handler).to eq handler }
+      it { expect(definition.klass).to eq conductor }
       it { expect(definition.actions).to eq actions }
     end
 
-    context "when handler class doesn't exist" do
-      let(:handle) { "not_defined" }
+    context "when conductor class doesn't exist" do
+      let(:handle) { "not_defind" }
 
       subject(:definition) { described_class.new handle: handle }
 
-      it { expect { definition.handler }.to raise_error UndefinedHandler }
+      it { expect { definition.klass }.to raise_error UndefinedConductor }
     end
 
     context "when class_name is assumed" do
       it_behaves_like "a definition class" do
         let(:handle)  { "handle_name" }
-        let(:handler) { HandleNameHandler }
+        let(:conductor) { HandleNameConductor }
       end
     end
 
@@ -49,7 +49,7 @@ module Handler
       it_behaves_like "a definition class" do
         let(:handle)     { "handle_name" }
         let(:class_name) { "foo_bar" }
-        let(:handler)    { FooBarHandler }
+        let(:conductor)    { FooBarConductor }
       end
     end
   end

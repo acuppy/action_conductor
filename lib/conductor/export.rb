@@ -1,4 +1,4 @@
-module Handler
+module Conductor
   class Export
     attr_reader :id, :value, :context
 
@@ -8,9 +8,9 @@ module Handler
       @context = options.fetch(:context)
     end
 
-    def export
+    def export(export_value=nil)
       if value.is_a? Proc
-        context.instance_eval { value.call }
+        context.instance_eval { value.call exported_value }
       else
         value
       end

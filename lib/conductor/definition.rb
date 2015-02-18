@@ -1,4 +1,4 @@
-module Handler
+module Conductor
   class Definition
     attr_reader :handle, :class_name
 
@@ -8,8 +8,8 @@ module Handler
       @class_name = configs.fetch(:class_name, @handle)
     end
 
-    def handler
-      @handler ||= handler_klass
+    def klass
+      @conductor_klass ||= conductor_klass
     end
 
     def actions
@@ -18,14 +18,14 @@ module Handler
 
     private
 
-    def handler_klass
-      Object.const_get(handler_klass_name)
+    def conductor_klass
+      Object.const_get(conductor_klass_name)
     rescue NameError
-      raise UndefinedHandler.new(handler_klass_name)
+      raise UndefinedConductor.new(conductor_klass_name)
     end
 
-    def handler_klass_name
-      "#{class_name.camelize}Handler"
+    def conductor_klass_name
+      "#{class_name.to_s.camelize}Conductor"
     end
   end
 end

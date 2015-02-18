@@ -1,11 +1,9 @@
 require "spec_helper"
-require "handler/base"
+require "conductor/base"
 
-module Handler
+module Conductor
   describe Base do
     let(:controller) { double :controller, params: {} }
     subject(:base) { Base.new(controller) }
-
-    it { is_expected.to respond_to :handled? }
   end
 end
