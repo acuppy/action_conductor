@@ -17,7 +17,7 @@ And then execute:
 
 ## Usage
 
-Define a Conductor
+Define a Conductor in `app/conductors`
 
 ```ruby
 class PagesConductor < Conductor::Base
