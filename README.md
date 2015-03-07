@@ -8,7 +8,7 @@ DRY-up Rails Controllers with conductors
 Add this line to your application's Gemfile:
 
 ```ruby
-gem 'conductor'
+gem 'conductor-rails'
 ```
 
 And then execute:
