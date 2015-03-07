@@ -23,5 +23,4 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency "rails", "~> 4.1.0"
   spec.add_development_dependency "guard", "~> 2.10.0"
   spec.add_development_dependency "guard-rspec", "~> 4.3.1"
-  spec.add_development_dependency "pry-byebug"
 end
