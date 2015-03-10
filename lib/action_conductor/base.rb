@@ -1,4 +1,4 @@
-module Conductor
+module ActionConductor
   class Base
     def initialize(controller)
       @controller = controller

@@ -1,5 +1,5 @@
 require "spec_helper"
-require "conductor/definition"
+require "action_conductor/definition"
 
 class HandleNameConductor
 end
@@ -7,7 +7,7 @@ end
 class FooBarConductor
 end
 
-module Conductor
+module ActionConductor
   describe Definition do
     shared_examples_for "a definition class" do
       let(:class_name) { nil }

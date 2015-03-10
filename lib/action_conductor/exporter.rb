@@ -1,4 +1,4 @@
-module Conductor
+module ActionConductor
   class Exporter
 
     attr_reader :conductor

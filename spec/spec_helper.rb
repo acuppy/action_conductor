@@ -1,8 +1,7 @@
 $LOAD_PATH.unshift File.expand_path('../../lib', __FILE__)
 require "rails"
 require "action_controller"
-require 'conductor'
-require "pry"
+require 'action_conductor'
 
 class DummyController < ActionController::Base
   def params
@@ -10,7 +9,7 @@ class DummyController < ActionController::Base
   end
 
   def index
-    @foo = conductor.export(:foo)
+    @foo = exports(:foo)
     @bar = conductor.export(:bar)
     @foo_a, @bar_a, @meme = conductor.export
     @bar_b, @foo_b = conductor.export(:bar, :foo)
@@ -19,7 +18,7 @@ class DummyController < ActionController::Base
   end
 end
 
-class TestMultiExportConductor < Conductor::Base
+class TestMultiExportConductor < ActionConductor::Base
   export :foo, "Hello World"
   export :bar, "Goodbye Moon"
 

@@ -1,4 +1,4 @@
-module Conductor
+module ActionConductor
   class DeferredExport
     attr_reader :id
 

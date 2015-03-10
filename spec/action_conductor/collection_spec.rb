@@ -1,6 +1,6 @@
 require "spec_helper"
 
-module Conductor
+module ActionConductor
   describe Collection do
     let(:conductor) {  }
     describe "#with_handle" do

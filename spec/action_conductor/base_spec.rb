@@ -1,7 +1,7 @@
 require "spec_helper"
-require "conductor/base"
+require "action_conductor/base"
 
-module Conductor
+module ActionConductor
   describe Base do
     let(:controller) { double :controller, params: {} }
     subject(:base) { Base.new(controller) }

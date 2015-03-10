@@ -1,4 +1,4 @@
-module Conductor
+module ActionConductor
   class Definition
     attr_reader :handle, :class_name
 

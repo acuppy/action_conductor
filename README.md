@@ -1,4 +1,4 @@
-# Conductor
+# Action Conductor
 [![Build Status](https://travis-ci.org/acuppy/conductor.svg?branch=master)](https://travis-ci.org/acuppy/conductor)[![Code Climate](https://codeclimate.com/github/acuppy/conductor/badges/gpa.svg)](https://codeclimate.com/github/acuppy/conductor)
 
 DRY-up Rails Controllers with conductors
@@ -8,7 +8,7 @@ DRY-up Rails Controllers with conductors
 Add this line to your application's Gemfile:
 
 ```ruby
-gem 'conductor-rails', require: 'conductor'
+gem 'action_conductor'
 ```
 
 And then execute:
@@ -22,7 +22,7 @@ $ bundle
 Define a Conductor in `app/conductors`
 
 ```ruby
-class PagesConductor < Conductor::Base
+class PagesConductor < ActionConductor::Base
 
   # pass it a value directly
   export :page, "Hello World"
@@ -94,7 +94,7 @@ class PagesController < ApplicationController
   end
 end
 
-class PagesConductor < Conductor::Base
+class PagesConductor < ActionConductor::Base
   export :address do |street|
     "#{street} Medford, OR 97501"
   end

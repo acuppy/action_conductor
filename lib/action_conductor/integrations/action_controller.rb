@@ -1,4 +1,4 @@
-module Conductor
+module ActionConductor
   module ActionController
     extend ActiveSupport::Concern
 
@@ -55,5 +55,5 @@ module Conductor
 end
 
 if defined? ActionController::Base
-  ActionController::Base.send :include, Conductor::ActionController
+  ActionController::Base.send :include, ActionConductor::ActionController
 end

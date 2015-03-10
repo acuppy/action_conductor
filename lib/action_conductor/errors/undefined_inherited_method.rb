@@ -1,4 +1,4 @@
-module Conductor
+module ActionConductor
   class UndefinedInheritedMethod < StandardError
     def initialize(method)
       super("#{method} should have been defined by the conductor")

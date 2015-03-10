@@ -1,4 +1,4 @@
-module Conductor
+module ActionConductor
   class ActionRunner
 
     def initialize(options={})

@@ -1,6 +1,6 @@
 require "delegate"
 
-module Conductor
+module ActionConductor
   class Collection < SimpleDelegator
 
     attr_reader :conductors

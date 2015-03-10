@@ -1,15 +1,15 @@
 # coding: utf-8
 lib = File.expand_path('../lib', __FILE__)
 $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
-require 'conductor/version'
+require 'action_conductor/version'
 
 Gem::Specification.new do |spec|
-  spec.name          = "conductor-rails"
-  spec.version       = Conductor::VERSION
+  spec.name          = "action_conductor"
+  spec.version       = ActionConductor::VERSION
   spec.authors       = ["Adam Cuppy"]
   spec.email         = ["adam@codingzeal.com"]
   spec.summary       = %q{DRY-up Rails controllers by leveraging interchangeable conductors to export data}
-  spec.homepage      = "https://github.com/acuppy/conductor-rails"
+  spec.homepage      = "https://github.com/acuppy/action_conductor"
   spec.license       = "MIT"
 
   spec.files         = `git ls-files -z`.split("\x0")

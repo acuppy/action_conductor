@@ -12,34 +12,18 @@ describe DummyController, "Integration ActionController::Base" do
     context "when exporting" do
       before  { controller.index }
 
-      context "@foo" do
-        subject { controller.instance_variable_get :@foo }
-        it { is_expected.to eq "Hello World" }
+      ["@foo", "@foo_a", "@foo_b"].each do |var|
+        context var do
+          subject { controller.instance_variable_get var.to_sym }
+          it { is_expected.to eq "Hello World" }
+        end
       end
 
-      context "@foo_a" do
-        subject { controller.instance_variable_get :@foo_a }
-        it { is_expected.to eq "Hello World" }
-      end
-
-      context "@foo_b" do
-        subject { controller.instance_variable_get :@foo_b }
-        it { is_expected.to eq "Hello World" }
-      end
-
-      context "@bar" do
-        subject { controller.instance_variable_get :@bar }
-        it { is_expected.to eq "Goodbye Moon" }
-      end
-
-      context "@bar_a" do
-        subject { controller.instance_variable_get :@bar_a }
-        it { is_expected.to eq "Goodbye Moon" }
-      end
-
-      context "@bar_b" do
-        subject { controller.instance_variable_get :@bar_b }
-        it { is_expected.to eq "Goodbye Moon" }
+      ["@bar", "@bar_a", "@bar_b"].each do |var|
+        context var do
+          subject { controller.instance_variable_get var.to_sym }
+          it { is_expected.to eq "Goodbye Moon" }
+        end
       end
 
       context "@meme" do
@@ -56,6 +40,9 @@ describe DummyController, "Integration ActionController::Base" do
         subject { controller.instance_variable_get :@my_method }
         it { is_expected.to eq "conductor method called" }
       end
+    end
+
+    context "without explicitly defining the conductor" do
     end
   end
 end
