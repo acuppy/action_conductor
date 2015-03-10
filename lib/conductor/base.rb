@@ -1,5 +1,3 @@
-require 'ostruct'
-
 module Conductor
   class Base
     def initialize(controller)
@@ -24,10 +22,8 @@ module Conductor
     attr_reader :controller, :params
 
     def self.export(id, value=nil, &block)
-      @exports ||= []
-
       callback = value.nil? ? block : Proc.new { value }
-      @exports << DeferredExport.new( id: id, callback: callback )
+      exports << DeferredExport.new(id, &callback)
     end
 
     def self.exports

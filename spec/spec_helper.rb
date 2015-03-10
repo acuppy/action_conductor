@@ -15,17 +15,27 @@ class DummyController < ActionController::Base
     @foo_a, @bar_a, @meme = conductor.export
     @bar_b, @foo_b = conductor.export(:bar, :foo)
     @omg = conductor.export(:omg, "LMAO")
+    @my_method = conductor.export(:my_method)
   end
-
 end
 
 class TestMultiExportConductor < Conductor::Base
   export :foo, "Hello World"
   export :bar, "Goodbye Moon"
+
   export :meme do
     "Me me"
   end
+
   export :omg do |lol|
     "#{lol}..."
+  end
+
+  export :my_method do
+    my_method
+  end
+
+  def my_method
+    "conductor method called"
   end
 end

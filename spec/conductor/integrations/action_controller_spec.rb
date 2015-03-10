@@ -51,6 +51,11 @@ describe DummyController, "Integration ActionController::Base" do
         subject { controller.instance_variable_get :@omg }
         it { is_expected.to eq "LMAO..." }
       end
+
+      context "@my_method" do
+        subject { controller.instance_variable_get :@my_method }
+        it { is_expected.to eq "conductor method called" }
+      end
     end
   end
 end

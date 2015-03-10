@@ -2,18 +2,16 @@ module Conductor
   class DeferredExport
     attr_reader :id
 
-    def initialize(options={})
-      @id       = options.fetch(:id)
-      @callback = options.fetch(:callback)
-      @context  = options.fetch(:context, self)
+    def initialize(id, &callback)
+      @id, @callback = id, callback
     end
 
-    def export(export_value=nil)
-      context.instance_eval { @callback.call export_value }
+    def export(context, export_value=nil)
+      context.instance_exec(export_value, &callback)
     end
 
     private
 
-    attr_reader :context
+    attr_reader :context, :callback
   end
 end

@@ -14,14 +14,22 @@ module Conductor
 
     private
 
-    attr_reader :arguments
+    attr_reader :arguments, :context
 
     def output
       @output ||= begin
-        selected_exports.to_a.each_with_object([]) do |export, exports|
-          exports << export.export(requested_export_value)
+        enumerable_exports do |deferred, exports|
+          exports << export_deferred(deferred)
         end
       end
+    end
+
+    def enumerable_exports(&block)
+      selected_exports.to_a.each_with_object([], &block)
+    end
+
+    def export_deferred(deferred)
+      deferred.export(conductor, requested_export_value)
     end
 
     def selected_exports
