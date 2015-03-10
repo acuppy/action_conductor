@@ -1,5 +1,5 @@
 # Action Conductor
-[![Build Status](https://travis-ci.org/acuppy/conductor.svg?branch=master)](https://travis-ci.org/acuppy/action_conductor)[![Code Climate](https://codeclimate.com/github/acuppy/conductor/badges/gpa.svg)](https://codeclimate.com/github/acuppy/action_conductor)
+[![Build Status](https://travis-ci.org/acuppy/action_conductor.svg?branch=master)](https://travis-ci.org/acuppy/action_conductor)[![Code Climate](https://codeclimate.com/github/acuppy/conductor/badges/gpa.svg)](https://codeclimate.com/github/acuppy/action_conductor)
 
 DRY-up Rails Controllers with conductors
 
