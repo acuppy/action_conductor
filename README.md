@@ -13,7 +13,9 @@ gem 'conductor-rails', require: 'conductor'
 
 And then execute:
 
-    $ bundle
+```
+$ bundle
+```
 
 ## Usage
 
@@ -43,9 +45,6 @@ class PagesConductor < Conductor::Base
   # ... delegates to ...
   def bar_conductor
   end
-
-  # exports are exported in the same order they are established, but you can override that order...
-  order :foo, :page, :meta, :bar
 end
 ```
 
@@ -53,17 +52,17 @@ Bind it to a Rails Controller
 
 ```ruby
 class PagesController < ApplicationController
-  conductor :pages, only: [:show]
+  conductor :pages
   # ...
 end
 ```
 
-Export computed values via `conductor.exports`
+Export computed values via `exports`
 ```ruby
 class PagesController < ApplicationController
   # ...
   def show
-    @page = conductor.exports
+    @page = exports
   end
 end
 ```
@@ -73,7 +72,7 @@ or export multiple computed values
 class PagesController < ApplicationController
   # ...
   def show
-    @page, @meta = conductor.exports # => exports in the established order
+    @page, @meta = exports # => exports in the established order
   end
 end
 ```
@@ -82,7 +81,7 @@ explicitly declare which exports to export, and in which order
 class PagesController < ApplicationController
   # ...
   def show
-    @meta, @page = conductor.exports(:meta, :page)
+    @meta, @page = exports(:meta, :page)
   end
 end
 ```
@@ -91,7 +90,7 @@ Pass arguments to the export block
 class PagesController < ApplicationController
   # ...
   def show
-    @address = conductor.exports(:address, "111 Main St.")
+    @address = exports(:address, "111 Main St.")
   end
 end
 
@@ -102,62 +101,15 @@ class PagesConductor < Conductor::Base
 end
 ```
 
-Like Controller filters, conductors are inherited and override (or skip) established conductors
+In case there is a competing `exports` method on the controller, you can access it through
+the `conductor` instance
 
 ```ruby
 class PagesController < ApplicationController
-  conductor :pages, only: [:show]
   # ...
-end
-
-class AdminPagesController < PagesController
-  unset_conductor :pages
-  # ...
-end
-```
-
-Extend an existing conductor, while keeping it's established constraints.  Extending conductor exports (e.g. AdminPagesConductor) will be added down the export chain
-```ruby
-class AdminPagesController < PagesController
-  conductor :admin_pages, extend: :pages
-
   def show
-    @meta, @page, @admins = conductor.exports(:meta, :page, :admins) # => all values available
+    @foo = conductor.exports(:foo)
   end
-
-  # ...
-end
-```
-
-Or entirely replace an inherited conductor, while keeping it's established constraints
-```ruby
-class AdminPagesController < PagesController
-  conductor :admin_pages, replace: :pages
-
-  def show
-    @meta, @page = conductor.exports(:meta, :page) # => nil
-    @admins = conductor.exports(:admin) # => some value
-  end
-  # ...
-end
-```
-
-If you need to access a specific conductor, with a conflicting named exports, conductor methods are automatically scoped via a prefix.  You can continue to access the entire export collection via the root `conductor`
-```ruby
-class PagesController < ApplicationController
-  conductor :pages
-  # ...
-end
-
-class AdminPagesController < PagesController
-  conductor :admin_pages
-
-  def show
-    @page = pages_conductor.exports(:page)
-    @admin_page = admin_pages_conductor.exports(:page)
-    @admin_page = conductor.exports(:page) # => exports the latest established export (AdminPages)
-  end
-  # ...
 end
 ```
 
